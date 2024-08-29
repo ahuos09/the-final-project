@@ -4,7 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - Perfume Palace</title>
+    <link rel="icon" type="image/png" sizes="16x16" href="./images/icons8-utilisateur-sexe-neutre-50.png" />
     <link rel="stylesheet" href="./login_style.css">
+    <script>
+        function login(event) {
+            event.preventDefault(); 
+
+            const validUsername = "user";
+            const validPassword = "password123";
+
+           
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            
+            if (username === validUsername && password === validPassword) {
+                
+                window.location.href = "welcome.html";
+            } else {
+                
+                alert("Invalid username or password");
+            }
+        }
+    </script>
 </head>
 <body>
     <div class="login-container">

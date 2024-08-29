@@ -4,7 +4,60 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shopping Cart - Perfume Palace</title>
+    <link rel="icon" type="image/png" sizes="16x16" href="./images/icons8-caddie-50.png" />
+    <img src="./images/icons8-caddie-50.png" alt="">
     <link rel="stylesheet" href="./cart_style.css">
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            function updateProductTotal(row) {
+                const priceElement = row.querySelector('td:nth-child(3)');
+                const quantityElement = row.querySelector('input[type="number"]');
+                const totalElement = row.querySelector('td:nth-child(4)');
+                
+                const price = parseFloat(priceElement.textContent.replace('$', ''));
+                const quantity = parseInt(quantityElement.value);
+                const total = price * quantity;
+
+                totalElement.textContent = `$${total.toFixed(2)}`;
+            }
+            function updateCartSummary() {
+                let subtotal = 0;
+                const rows = document.querySelectorAll('.cart-table tbody tr');
+                
+                rows.forEach(row => {
+                    const totalElement = row.querySelector('td:nth-child(4)');
+                    const total = parseFloat(totalElement.textContent.replace('$', ''));
+                    subtotal += total;
+                });
+
+                const shipping = 10; 
+                const total = subtotal + shipping;
+
+                document.querySelector('.cart-summary p:nth-child(2)').textContent = `Subtotal: $${subtotal.toFixed(2)}`;
+                document.querySelector('.cart-summary p:nth-child(4)').textContent = `Total: $${total.toFixed(2)}`;
+            }
+            document.querySelectorAll('.cart-table input[type="number"]').forEach(input => {
+                input.addEventListener('change', function () {
+                    const row = this.closest('tr');
+                    updateProductTotal(row);
+                    updateCartSummary();
+                });
+            });
+
+            document.querySelectorAll('.remove-btn').forEach(button => {
+                button.addEventListener('click', function () {
+                    const row = this.closest('tr');
+                    row.remove();
+                    updateCartSummary();
+                });
+            });
+
+            document.querySelectorAll('.cart-table tbody tr').forEach(row => {
+                updateProductTotal(row);
+            });
+            updateCartSummary();
+        });
+    </script>
 </head>
 <body>
     <div class="cart-container">
@@ -44,8 +97,8 @@
                     <td>
                         <input type="number" value="1" min="1">
                     </td>
-                    <td>$150</td>
-                    <td>$150</td>
+                    <td>$350</td>
+                    <td>$350</td>
                     <td><button class="remove-btn">Remove</button></td>
                 </tr>
                 <tr>
@@ -70,7 +123,7 @@
             <p>Subtotal: $270</p>
             <p>Shipping: $10</p>
             <p><strong>Total: $280</strong></p>
-            <button class="checkout-btn">Proceed to Checkout</button>
+            <button class="checkout-btn"><a href="./home.html" style="text-decoration: none; color: white;">Proceed to Checkout</a></button>
         </div>
     </div>
 </body>
