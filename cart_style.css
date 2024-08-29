@@ -51,7 +51,7 @@
 
 .remove-btn {
     padding: 5px 10px;
-    background-color: #D9534F; 
+    background-color: #d1231d; 
     color: #FFF;
     border: none;
     border-radius: 5px;
@@ -59,7 +59,7 @@
 }
 
 .remove-btn:hover {
-    background-color: #C9302C; }
+    background-color: #a21c17; }
 
 .cart-summary {
     text-align: right;
